@@ -20,7 +20,7 @@ What you need to build this device:
 
 ![What you need](doc/what-you-need.jpg "What you need")
 
-[Detailed assembly instructions](README.Assembly.md).
+[**Detailed assembly instructions**](README.Assembly.md)
 
 Required components are:
 
@@ -49,9 +49,9 @@ PCB can be purchased directly from Project page.
 
 ## Firmware
 
-Download here: https://github.com/petrows/smarthome-galoped/releases
+[**Download firmware on releases page**](https://github.com/petrows/smarthome-galoped/releases)
 
-Regarding flashing / config / recompile: see below
+Regarding flashing / config / recompile: see below.
 
 ## Case
 
@@ -86,25 +86,19 @@ If you dont need this rule, you can deactivate it via:
 Rule1 OFF
 ```
 
-## Tasmota config
+## Flash Tasmota
 
 To configure module, you have to use custom firmware, as Tasmota has ANTx sensors support [disabled by default](https://tasmota.github.io/docs/AHT2x/).
 
 Simple workflow to upload proper firmware:
 
 ```bash
-wget https://petro.ws/s/tasmota-15.1.0-pws-module-v2.bin -O tasmota.bin
+wget https://github.com/petrows/smarthome-galoped/releases/download/v1/firmware.bin -O tasmota.bin
 esptool erase_flash
 esptool write_flash -fm dout 0x0 tasmota.bin
 ```
 
 Then configure Tasmota as usial, by connecting to built-in WiFI AP.
-
-Next step is to apply template. Navigate to `Configuration` » `Other`. There in `Template` section paste template:
-```json
-{"NAME":"PWS-Room-v2","GPIO":[1,1,1,1,608,640,1,1,224,1632,225,1600,226,1],"FLAG":0,"BASE":18,"CMND":"Interlock 1|WebButton1 R | WebButton2 Y | WebButton3 G | Rule1 ON"}
-```
-Enable `Activate` checkbox. Press `Save` to apply template.
 
 Connect you sensors back and now you will see data from sensors read:
 
@@ -144,4 +138,22 @@ platformio run -e tasmota --target upload --upload-port /dev/ttyUSB0
 
 Precompiled firmware can be found under `.pio/build/tasmota/firmware.bin`.
 
-Precompiled firmwares could be found here: https://github.com/petrows/smarthome-galoped/releases
+Precompiled firmwares could be found here: [Releases page](https://github.com/petrows/smarthome-galoped/releases).
+
+## Vanilla Tasmota
+
+You can use vanilla Tasmota releases, in this case you have to get firmware binary (default or customized one) and flash it using same way:
+
+```bash
+wget https://github.com/arendst/Tasmota/releases/download/v15.1.0/tasmota.bin -O tasmota.bin
+esptool erase_flash
+esptool write_flash -fm dout 0x0 tasmota.bin
+```
+
+Then configure Tasmota as usial, by connecting to built-in WiFI AP.
+
+Next step is to apply template. Navigate to `Configuration` » `Other`. There in `Template` section paste template:
+```json
+{"NAME":"PWS-Room-v2","GPIO":[1,1,1,1,608,640,1,1,224,1632,225,1600,226,1],"FLAG":0,"BASE":18,"CMND":"Interlock 1|WebButton1 R | WebButton2 Y | WebButton3 G | Rule1 ON"}
+```
+Enable `Activate` checkbox. Press `Save` to apply template.
