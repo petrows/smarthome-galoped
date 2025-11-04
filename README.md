@@ -51,6 +51,8 @@ PCB can be purchased directly from Project page.
 
 [**Download firmware on releases page**](https://github.com/petrows/smarthome-galoped/releases)
 
+Provided firmware has proper default template and rules configuration for LED's.
+
 Regarding flashing / config / recompile: see below.
 
 ## Case
